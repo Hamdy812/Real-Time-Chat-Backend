@@ -20,12 +20,14 @@ const userSchema=mongoose.Schema({
 },{ timestamps: true }
 )
 
-userSchema.pre('save',async ()=>{
-    const salt=bcrypt.genSalt(10)
+userSchema.pre('save',async function (next){
+
+    if (!this.isModified('password'))
+        return next();
+    const salt= await bcrypt.genSalt(10)
     this.password=await bcrypt.hash(this.password,salt)
-      next();
 
 });
 
-const usermodel=mongoose.model("User",userschmea)
+const usermodel=mongoose.model("User",userSchema)
 module.exports=usermodel;

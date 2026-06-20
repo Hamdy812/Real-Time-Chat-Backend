@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const messageSchema=mongoose.Schema({
   
     sender:{
-        type:mongoose.Schema.type.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
-    precevier:{
-       type:mongoose.Schema.type.ObjectId,
+    receiver:{
+       type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
-    messagecontent:{
+    messageContent:{
         type:String,
-        required: [true,"password is required"],
+        required: [true,"message content is required"],
     },
 },{ timestamps: true }
 )
